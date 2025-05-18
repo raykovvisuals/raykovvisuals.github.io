@@ -1002,26 +1002,30 @@
       });
      }
 
-     // Fallback for autoplay restrictions
+     // Video autoplay fallback
     document.addEventListener('DOMContentLoaded', function() {
       const videos = document.querySelectorAll('video');
   
       const tryPlay = (video) => {
-        video.play().catch(error => {
-          // Show play button if autoplay fails
-          video.controls = true;
-          video.removeAttribute('autoplay');
-        });
+        const promise = video.play();
+        if (promise !== undefined) {
+          promise.catch(() => {
+            video.controls = true;
+            video.setAttribute('poster', 'placeholder.jpg'); // Add loading image
+          });
+        }
       };
 
-      // Try playing each video
+      // Try playing when page loads
       videos.forEach(video => {
-        video.muted = true; // Ensure muted for autoplay
+        video.muted = true;
         tryPlay(video);
-    
-        // Try again when user interacts with page
-        document.body.addEventListener('click', () => tryPlay(video), { once: true });
       });
+
+      // Try again when user interacts
+      document.addEventListener('click', () => {
+        videos.forEach(video => tryPlay(video));
+      }, { once: true });
     });
   </script>
 </body>
