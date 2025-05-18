@@ -140,14 +140,15 @@
 
     /* ===== HEADER (HERO SECTION) ===== */
     header {
-      height: 30vh;
+      height: auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       position: relative;
       text-align: center;
-      padding: 2rem 2rem 2rem;
+      padding: 4rem 2rem 2rem; /* Reduced from 6rem 2rem 3rem */
+      min-height: 40vh;
       background: linear-gradient(135deg, rgba(15, 0, 30, 0.95) 0%, rgba(35, 0, 70, 0.85) 100%);
       backdrop-filter: blur(5px);
     }
@@ -155,11 +156,12 @@
     .hero-content {
       text-align: center;
       z-index: 2;
+      padding: 0;
     }
 
     .hero-subtitle {
       font-size: 1.5rem;
-      margin: 1rem 0 2rem;
+      margin: 0.5rem 0 1.5rem; /* Reduced from 1rem 0 2rem */
       text-shadow: 0 0 12px rgba(168, 61, 255, 0.8);
 
     }
@@ -174,6 +176,7 @@
       letter-spacing: 1px;
       transition: all 0.3s ease;
       color: white;
+      margin-bottom: 1rem; /* Added space below button */
     }
 
     .cta-button:hover {
@@ -183,7 +186,7 @@
 
     .scrolldown-indicator {
       position: absolute;
-      bottom: 20px;
+      bottom: 50px; /* Raised slightly from 30px */;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
@@ -214,6 +217,10 @@
       animation: jump 1.5s ease-in-out infinite;
       color: #c78aff;
       text-shadow: 0 0 8px rgba(199, 138, 255, 0.6);
+    }
+
+    .animated-title {
+      margin-bottom: 0.5rem;
     }
 
     .animated-title span:nth-child(1) { animation-delay: 0s; }
@@ -550,18 +557,22 @@
       /* Header Adjustments */
       header {
         height: auto;
-        min-height: 60vh;
-        padding: 1rem 1rem 1rem;
+        min-height: 35vh; /* Reduced from 50vh */
+        padding: 3rem 1rem 1.5rem; /* Even more compact */
       }
   
       .animated-title span {
-        font-size: 1rem;
+        font-size: 2.2rem; /* Slightly larger than mobile-first version */
         animation: jump 2s ease-in-out infinite;
       }
   
+      .animated-title {
+        margin-bottom: 0.5rem;
+      }
+
       .hero-subtitle {
-        font-size: 1.2rem;
-        margin: 1rem 0;
+        margin: 0.3rem 0 1rem;
+        font-size: 1rem;
       }
 
       .hero-content{
@@ -630,7 +641,7 @@
         position: relative;
         bottom: auto;
         right: auto;
-        margin: 1.5rem 0 0 0;
+        margin: 0.8rem 0 0 0;
         width: auto;
         display: inline-block;
         padding: 12px 24px;
@@ -640,7 +651,7 @@
 
       .scrolldown-indicator {
         position: relative;
-        margin-top: 2rem auto 0;
+        margin: 1rem auto 0;
         bottom: auto;
       }
 
@@ -662,8 +673,14 @@
         font-size: 2.2rem;
       }
   
+      header {
+        padding: 3rem 1rem 1.5rem;
+        min-height: 45vh;
+      }
+
       .hero-subtitle {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        margin: 0.3rem 0 0.8rem;
       }
   
       nav a {
@@ -675,16 +692,21 @@
         font-size: 1.2rem;
       }
   
+      .animated-title span {
+        font-size: 2rem;
+      }
+
       .section {
         padding: 1.5rem 0.8rem;
       }
-    }
+    
 
-    .cta-button{
-      padding: 12px 24px;
-      font-size: 0.9rem;
+     .cta-button {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+        margin: 0.8rem 0 0 0;
+      }
     }
-
     /* Touch Device Enhancements */
     @media (hover: none) {
       button, .cta-button, nav a {
