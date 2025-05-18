@@ -327,6 +327,35 @@
       z-index: 2;
     }
 
+    /* Video Container Fixes */
+.video-wrapper {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto 1.5rem;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #1a0033;
+  aspect-ratio: 16/9;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fallback-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  display: none;
+}
+
     @media (max-width: 768px) {
       .video-size {
         width: 90%;
@@ -533,6 +562,19 @@
       color: #90ee90;
       font-weight: 500;
     }
+
+    .reel {
+    flex-direction: column;
+  }
+  
+  .video-wrapper {
+    width: 100%;
+  }
+  
+  /* Show fallback if video doesn't autoplay */
+  .video-wrapper video[poster] + .fallback-message {
+    display: block;
+  }
 
     /* ===== COMPREHENSIVE MOBILE STYLES ===== */
     @media (max-width: 768px) {
@@ -1002,31 +1044,42 @@
       });
      }
 
-     // Video autoplay fallback
-    document.addEventListener('DOMContentLoaded', function() {
-      const videos = document.querySelectorAll('video');
+     // Mobile Video Fix
+document.addEventListener('DOMContentLoaded', function() {
+  const videos = document.querySelectorAll('.video-wrapper video');
   
-      const tryPlay = (video) => {
-        const promise = video.play();
-        if (promise !== undefined) {
-          promise.catch(() => {
-            video.controls = true;
-            video.setAttribute('poster', 'placeholder.jpg'); // Add loading image
-          });
-        }
-      };
-
-      // Try playing when page loads
-      videos.forEach(video => {
-        video.muted = true;
-        tryPlay(video);
+  // Try to autoplay with mute
+  const tryAutoplay = (video) => {
+    video.muted = true;
+    const promise = video.play();
+    
+    if (promise !== undefined) {
+      promise.catch(error => {
+        // Show fallback message
+        video.parentNode.querySelector('.fallback-message').style.display = 'block';
+        video.setAttribute('poster', 'placeholder-m5.jpg');
       });
+    }
+  };
 
-      // Try again when user interacts
-      document.addEventListener('click', () => {
-        videos.forEach(video => tryPlay(video));
-      }, { once: true });
+  // Initialize all videos
+  videos.forEach(video => {
+    tryAutoplay(video);
+    
+    // Add click-to-play fallback
+    video.addEventListener('click', function() {
+      this.muted = false;
+      this.play();
+      this.parentNode.querySelector('.fallback-message').style.display = 'none';
     });
+  });
+
+  // Retry when user interacts with page
+  document.addEventListener('click', function init() {
+    videos.forEach(video => tryAutoplay(video));
+    document.removeEventListener('click', init);
+  });
+});
   </script>
 </body>
 </html>
