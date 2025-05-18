@@ -303,8 +303,10 @@
     .reel {
       display: flex;
       justify-content: space-around;
-      padding: 2rem;
-      gap: 1rem;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1.5rem;
+      align-items: center;
     }
 
     .video-size {
@@ -314,6 +316,9 @@
       box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
       transition: all 0.5s ease;
       transform: scale(0.98);
+      object-fit: cover; /* Ensures video fills container */
+      aspect-ratio: 9/16; /* Standard video ratio */
+      height: auto;
     }
 
     .video-size:hover {
@@ -724,6 +729,24 @@
         box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
       }
     }
+
+    @media (min-width: 769px) {
+      .reel {
+        flex-direction: row; /* Side by side on desktop */
+        justify-content: center;
+      }
+      .video-size {
+        width: 30%;
+      }
+    }
+
+    /* iOS-specific fixes */
+    @supports (-webkit-touch-callout: none) {
+      video {
+        /* iOS sometimes needs this to autoplay */
+        -webkit-playsinline: true;
+      }
+    }
   </style>
 </head>
 <body>
@@ -756,11 +779,20 @@
 
   <!-- REEL SECTION -->
   <section id="reel" class="section fade-in-on-scroll">
-    <h2>🎞 Showreel</h2>
-    <div class="reel">
-      <video src="M5.mp4" autoplay loop muted class="video-size"></video>
-      <video src="amg e63.mp4" autoplay loop muted class="video-size"></video>
-      <video src="spyder rs.mp4" autoplay loop muted class="video-size"></video>
+  <h2>🎞 Showreel</h2>
+  <div class="reel">
+    <video playsinline autoplay loop muted class="video-size">
+      <source src="M5.mp4" type="video/mp4">
+      Your browser doesn't support HTML5 video
+    </video>
+    <video playsinline autoplay loop muted class="video-size">
+      <source src="amg e63.mp4" type="video/mp4">
+      Your browser doesn't support HTML5 video
+    </video>
+    <video playsinline autoplay loop muted class="video-size">
+      <source src="spyder rs.mp4" type="video/mp4">
+      Your browser doesn't support HTML5 video
+    </video>
     </div>
   </section>
 
@@ -969,6 +1001,28 @@
         vid.src = vid.src.replace('.mp4', '-mobile.mp4');
       });
      }
+
+     // Fallback for autoplay restrictions
+    document.addEventListener('DOMContentLoaded', function() {
+      const videos = document.querySelectorAll('video');
+  
+      const tryPlay = (video) => {
+        video.play().catch(error => {
+          // Show play button if autoplay fails
+          video.controls = true;
+          video.removeAttribute('autoplay');
+        });
+      };
+
+      // Try playing each video
+      videos.forEach(video => {
+        video.muted = true; // Ensure muted for autoplay
+        tryPlay(video);
+    
+        // Try again when user interacts with page
+        document.body.addEventListener('click', () => tryPlay(video), { once: true });
+      });
+    });
   </script>
 </body>
 </html>
