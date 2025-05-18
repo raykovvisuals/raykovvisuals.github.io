@@ -520,75 +520,163 @@
       font-weight: 500;
     }
 
-    /* ===== MOBILE RESPONSIVENESS ===== */
+    /* ===== COMPREHENSIVE MOBILE STYLES ===== */
     @media (max-width: 768px) {
-      .ba-slider {
-        height: 16px !important;
+      /* Global Adjustments */
+      html {
+        font-size: 14px;
       }
   
-      .ba-slider::-webkit-slider-thumb {
-        width: 32px !important;
-        height: 32px !important;
-      }
-    }
-
-    @media (max-width: 768px) {
+      /* Navigation - Keep at top */
       nav {
-        flex-direction: column;
-        gap: 0.5rem;
-        padding: 0.5rem;
-        position: fixed;
-        bottom: 0;
-        top: auto;
-        width: 100%;
-        background: rgba(30, 0, 60, 0.95);
+        position: sticky;
+        top: 0;
+        flex-direction: row;
+        padding: 0.8rem 1rem;
+        gap: 1rem;
+        overflow-x: auto;
+        white-space: nowrap;
+        backdrop-filter: blur(8px);
+        -webkit-overflow-scrolling: touch;
       }
   
       nav a {
-        padding: 0.8rem;
-        text-align: center;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
       }
-    }
 
-    @media (max-width: 768px) {
-      input, textarea, select {
-        font-size: 16px; /* Prevents iOS zoom */
+      /* Header Adjustments */
+      header {
+        height: auto;
+        min-height: 60vh;
+        padding: 6rem 1.5rem 3rem;
       }
-    } 
+  
+      .animated-title span {
+        font-size: 2.8rem;
+        animation: jump 2s ease-in-out infinite;
+      }
+  
+      .hero-subtitle {
+        font-size: 1.2rem;
+        margin: 1rem 0;
+      }
 
-    @media (max-width: 768px) {
+      /* Video Reel Section */
+      .reel {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        gap: 1.5rem;
+      }
+  
+      .video-size {
+        width: 90%;
+        max-width: 100%;
+      }
+
+      /* Packages Section */
+      .section {
+        padding: 2rem 1rem;
+      }
+  
+      .package {
+        margin-bottom: 1.5rem;
+      }
+
+      /* Before/After Slider */
+      .ba-inline-container {
+        max-width: 100%;
+      }
+  
+      .ba-slider {
+        height: 16px;
+        width: 90%;
+      }
+  
+      .ba-slider::-webkit-slider-thumb {
+        width: 28px;
+        height: 28px;
+      }
+
+      /* Form Adjustments */
+      form input,
+      form textarea {
+        font-size: 16px;
+        padding: 10px;
+      }
+  
+      form button {
+        width: 100%;
+        padding: 14px;
+      }
+
+      /* Footer */
+      footer {
+       padding: 1.5rem;
+      }
+
+      /* CTA Button */
       .cta-button {
         position: fixed;
-        bottom: 70px;
+        bottom: 20px;
         right: 20px;
+        padding: 12px 24px;
+        font-size: 0.95rem;
         z-index: 100;
-        padding: 15px 25px;
-       font-size: 1rem;
+      }
+
+      /* Scroll to Top Button */
+      #scrollToTop {
+        bottom: 80px;
+        right: 20px;
+      }
+
+      /* Section Dividers */
+      .section::before {
+        width: 70%;
       }
     }
 
+    /* Smaller Mobile Devices */
+    @media (max-width: 480px) {
+      .animated-title span {
+        font-size: 2.2rem;
+      }
+  
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+  
+      nav a {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+      }
+  
+      .package h3 {
+        font-size: 1.2rem;
+      }
+  
+      .section {
+        padding: 1.5rem 0.8rem;
+      }
+    }
+
+    /* Touch Device Enhancements */
     @media (hover: none) {
       button, .cta-button, nav a {
         transition: transform 0.1s ease;
       }
   
-      button:active, .cta-button:active, nav a:active {
-        transform: scale(0.95);
-      }
-    }
-
-    @media (max-width: 600px) {
-      header {
-        height: 50vh;
-        padding-top: 3rem;
+      button:active, 
+      .cta-button:active, 
+      nav a:active {
+        transform: scale(0.96);
       }
   
-      .animated-title span {
-        font-size: 3rem;
-      }
-  
-      .hero-subtitle {
-        font-size: 1.2rem;
+      .video-size:hover {
+        transform: none;
+        box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
       }
     }
   </style>
