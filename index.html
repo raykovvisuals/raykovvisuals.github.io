@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>raykov.visuals</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
@@ -327,33 +327,20 @@
       z-index: 2;
     }
 
-    /* Video Container Fixes */
-.video-wrapper {
+    .video-wrapper {
   position: relative;
-  width: 90%;
+  width: 100%;
   max-width: 400px;
   margin: 0 auto 1.5rem;
   border-radius: 20px;
   overflow: hidden;
   background: #1a0033;
-  aspect-ratio: 16/9;
 }
 
 .video-wrapper video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
-}
-
-.fallback-message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-  display: none;
 }
 
     @media (max-width: 768px) {
@@ -823,20 +810,29 @@
   <section id="reel" class="section fade-in-on-scroll">
   <h2>🎞 Showreel</h2>
   <div class="reel">
-    <video playsinline autoplay loop muted class="video-size">
-      <source src="M5.webm" type="video/webm">
-      Your browser doesn't support HTML5 video
-    </video>
-    <video playsinline autoplay loop muted class="video-size">
-      <source src="amg e63.webm" type="video/webm">
-      Your browser doesn't support HTML5 video
-    </video>
-    <video playsinline autoplay loop muted class="video-size">
-      <source src="spyder rs.webm" type="video/webm">
-      Your browser doesn't support HTML5 video
-    </video>
+    <div class="video-wrapper">
+      <video playsinline autoplay loop muted class="video-size" poster="placeholder.jpg">
+        <source src="M5.webm" type="video/webm">
+        <source src="M5.mp4" type="video/mp4">
+        Your browser doesn't support HTML5 video
+      </video>
     </div>
-  </section>
+    <div class="video-wrapper">
+      <video playsinline autoplay loop muted class="video-size" poster="placeholder.jpg">
+        <source src="amg e63.webm" type="video/webm">
+        <source src="amg e63.mp4" type="video/mp4">
+        Your browser doesn't support HTML5 video
+      </video>
+    </div>
+    <div class="video-wrapper">
+      <video playsinline autoplay loop muted class="video-size" poster="placeholder.jpg">
+        <source src="spyder rs.webm" type="video/webm">
+        <source src="spyder rs.mp4" type="video/mp4">
+        Your browser doesn't support HTML5 video
+      </video>
+    </div>
+  </div>
+</section>
 
   <!-- PACKAGES SECTION -->
   <section id="packages" class="section fade-in-on-scroll">
@@ -1046,18 +1042,19 @@
 
      // Mobile Video Fix
 document.addEventListener('DOMContentLoaded', function() {
-  const videos = document.querySelectorAll('.video-wrapper video');
+  const videos = document.querySelectorAll('video');
   
-  // Try to autoplay with mute
   const tryAutoplay = (video) => {
     video.muted = true;
     const promise = video.play();
     
     if (promise !== undefined) {
       promise.catch(error => {
-        // Show fallback message
-        video.parentNode.querySelector('.fallback-message').style.display = 'block';
-        video.setAttribute('poster', 'placeholder-m5.jpg');
+        // Show fallback message if available
+        const fallback = video.nextElementSibling;
+        if (fallback && fallback.classList.contains('fallback-message')) {
+          fallback.style.display = 'block';
+        }
       });
     }
   };
@@ -1068,9 +1065,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add click-to-play fallback
     video.addEventListener('click', function() {
-      this.muted = false;
-      this.play();
-      this.parentNode.querySelector('.fallback-message').style.display = 'none';
+      if (this.paused) {
+        this.play().catch(e => {
+          this.muted = true;
+          this.play();
+        });
+      }
+      const fallback = this.nextElementSibling;
+      if (fallback && fallback.classList.contains('fallback-message')) {
+        fallback.style.display = 'none';
+      }
     });
   });
 
@@ -1080,6 +1084,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.removeEventListener('click', init);
   });
 });
+
+// iOS specific touch event
+document.addEventListener('touchstart', function() {
+  document.querySelectorAll('video').forEach(video => {
+    video.muted = true;
+    video.play().catch(e => console.log('Autoplay prevented'));
+  });
+}, { once: true });
   </script>
 </body>
 </html>
