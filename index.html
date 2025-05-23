@@ -1149,80 +1149,80 @@
      }
 
      // Video handling for mobile and desktop
-document.addEventListener('DOMContentLoaded', function() {
-  const videoContainers = document.querySelectorAll('.video-container');
-  
-  // Initialize Intersection Observer for lazy loading
-  const lazyVideoObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const container = entry.target;
-        const video = container.querySelector('video');
-        const videoSrc = video.getAttribute('data-src');
-        
-        if (videoSrc) {
-          // Show loading spinner
-          container.classList.add('loading');
-          
-          // Set video source
-          video.querySelector('source').src = videoSrc;
-          video.load();
-          
-          // Attempt to play (muted)
-          const playPromise = video.play();
-          
-          if (playPromise !== undefined) {
-            playPromise
-              .then(_ => {
-                // Autoplay worked
-                container.classList.remove('loading');
-                container.classList.add('playing');
-              })
-              .catch(error => {
-                // Autoplay was prevented
-                container.classList.remove('loading');
-                video.currentTime = 0;
-              });
-          }
-          
-          // Stop observing this video
-          observer.unobserve(container);
-        }
-      }
-    });
-  }, { rootMargin: '200px' });
-  
-  // Observe all video containers
-  videoContainers.forEach(container => {
-    lazyVideoObserver.observe(container);
-    
-    // Click/tap handler
-    container.addEventListener('click', function() {
-      const video = this.querySelector('video');
+    document.addEventListener('DOMContentLoaded', function() {
+      const videoContainers = document.querySelectorAll('.video-container');
       
-      if (video.paused) {
-        this.classList.add('loading');
-        video.play()
-          .then(_ => {
-            this.classList.remove('loading');
-            this.classList.add('playing');
-          })
-          .catch(error => {
-            this.classList.remove('loading');
-            // If play fails, mute and try again (required for some mobile browsers)
-            video.muted = true;
+      // Initialize Intersection Observer for lazy loading
+      const lazyVideoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const container = entry.target;
+            const video = container.querySelector('video');
+            const videoSrc = video.getAttribute('data-src');
+            
+            if (videoSrc) {
+              // Show loading spinner
+              container.classList.add('loading');
+              
+              // Set video source
+              video.querySelector('source').src = videoSrc;
+              video.load();
+              
+              // Attempt to play (muted)
+              const playPromise = video.play();
+              
+              if (playPromise !== undefined) {
+                playPromise
+                  .then(_ => {
+                    // Autoplay worked
+                    container.classList.remove('loading');
+                    container.classList.add('playing');
+                  })
+                  .catch(error => {
+                    // Autoplay was prevented
+                    container.classList.remove('loading');
+                    video.currentTime = 0;
+                  });
+              }
+              
+              // Stop observing this video
+              observer.unobserve(container);
+            }
+          }
+        });
+      }, { rootMargin: '200px' });
+      
+      // Observe all video containers
+      videoContainers.forEach(container => {
+        lazyVideoObserver.observe(container);
+        
+        // Click/tap handler
+        container.addEventListener('click', function() {
+          const video = this.querySelector('video');
+          
+          if (video.paused) {
+            this.classList.add('loading');
             video.play()
               .then(_ => {
                 this.classList.remove('loading');
                 this.classList.add('playing');
+              })
+              .catch(error => {
+                this.classList.remove('loading');
+                // If play fails, mute and try again (required for some mobile browsers)
+                video.muted = true;
+                video.play()
+                  .then(_ => {
+                    this.classList.remove('loading');
+                    this.classList.add('playing');
+                  });
               });
-          });
-      } else {
-        video.pause();
-        this.classList.remove('playing');
-      }
-    });
-  });
+          } else {
+            video.pause();
+            this.classList.remove('playing');
+          }
+        });
+      });
   
   // Handle page visibility changes
   document.addEventListener('visibilitychange', function() {

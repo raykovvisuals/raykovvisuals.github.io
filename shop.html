@@ -147,7 +147,7 @@
       align-items: center;
       position: relative;
       text-align: center;
-      padding: 4rem 2rem 2rem; /* Reduced from 6rem 2rem 3rem */
+      padding: 4rem 2rem 2rem;
       min-height: 40vh;
       background: linear-gradient(135deg, rgba(15, 0, 30, 0.95) 0%, rgba(35, 0, 70, 0.85) 100%);
       backdrop-filter: blur(5px);
@@ -161,9 +161,8 @@
 
     .hero-subtitle {
       font-size: 1.5rem;
-      margin: 0.5rem 0 1.5rem; /* Reduced from 1rem 0 2rem */
+      margin: 0.5rem 0 1.5rem;
       text-shadow: 0 0 12px rgba(168, 61, 255, 0.8);
-
     }
 
     .cta-button {
@@ -176,7 +175,7 @@
       letter-spacing: 1px;
       transition: all 0.3s ease;
       color: white;
-      margin-bottom: 1rem; /* Added space below button */
+      margin-bottom: 1rem;
     }
 
     .cta-button:hover {
@@ -186,7 +185,7 @@
 
     .scrolldown-indicator {
       position: absolute;
-      bottom: 50px; /* Raised slightly from 30px */;
+      bottom: 50px;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
@@ -266,164 +265,6 @@
       transform: translateY(0) scale(1);
     }
 
-    .package, .section ul, .section p {
-      background: rgba(20, 0, 40, 0.8);
-      box-shadow: 0 0 20px rgba(106, 0, 168, 0.2);
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 16px;
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(106, 0, 168, 0.4);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .package::before {
-      content: "";
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(45deg, #4a006a, #9d00ff, #ff00aa);
-      box-shadow: 0 0 30px rgba(157, 0, 255, 0.4);
-      background-size: 200% 200%;
-      z-index: -1;
-      border-radius: 18px;
-      animation: gradientBorder 3s ease infinite;
-    }
-
-    h2 {
-      color: #b388ff;
-    }
-
-    .package h3 { margin-top: 0; }
-
-    /* ===== REEL SECTION ===== */
-    .reel {
-      display: flex;
-      justify-content: space-around;
-      flex-direction: column;
-      padding: 1rem;
-      gap: 1.5rem;
-      align-items: center;
-    }
-
-    .video-size {
-      width: 30%;
-      max-width: 400px;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
-      transition: all 0.5s ease;
-      transform: scale(0.98);
-      object-fit: cover; /* Ensures video fills container */
-      aspect-ratio: 9/16; /* Standard video ratio */
-      height: auto;
-    }
-
-    .video-size:hover {
-      transform: scale(1);
-      box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
-      z-index: 2;
-    }
-
-    .video-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto 1.5rem;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #1a0033;
-}
-
-.video-wrapper video {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Video Container Styles */
-.video-container {
-  position: relative;
-  width: 90%;
-  max-width: 400px;
-  margin: 0 auto 1.5rem;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #1a0033;
-  aspect-ratio: 9/16;
-  cursor: pointer;
-}
-
-.video-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: opacity 0.3s ease;
-}
-
-/* Play Button */
-.play-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
-  background: rgba(168, 61, 255, 0.8);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: white;
-  opacity: 0.9;
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
-
-.video-container.playing .play-button {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.8);
-}
-
-/* Loading Spinner */
-.loading-spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: #a83dff;
-  animation: spin 1s linear infinite;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.video-container.loading .loading-spinner {
-  opacity: 1;
-}
-
-/* Touch device adjustments */
-@media (hover: none) {
-  .play-button {
-    width: 80px;
-    height: 80px;
-    font-size: 32px;
-  }
-}
-
-    @media (max-width: 768px) {
-      .video-size {
-        width: 90%;
-      }
-    }
-
     /* ===== SHOP ITEM STYLES ===== */
     .shop-item {
       background: rgba(20, 0, 40, 0.8);
@@ -444,7 +285,7 @@
       left: -2px;
       right: -2px;
       bottom: -2px;
-      background: linear-gradient(45deg, #4a006a, #000000);
+      background: linear-gradient(45deg, #2e0049, #5f009b);
       box-shadow: 0 0 30px rgba(157, 0, 255, 0.4);
       background-size: 200% 200%;
       z-index: -1;
@@ -464,14 +305,6 @@
       color: #b388ff;
     }
 
-    .price-tag {
-      background: linear-gradient(145deg, #8a00ff, #6a00a8);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-weight: bold;
-      box-shadow: 0 0 15px rgba(138, 0, 255, 0.5);
-    }
-
     .free-tag {
       background: linear-gradient(145deg, #00ff88, #00994d);
       padding: 0.5rem 1rem;
@@ -482,7 +315,7 @@
 
     .download-btn {
       display: inline-block;
-      background: linear-gradient(145deg, #8a00ff, #6a00a8);
+      background: linear-gradient(145deg, #00ff88, #00994d);
       color: white;
       padding: 0.8rem 1.5rem;
       border-radius: 30px;
@@ -490,23 +323,13 @@
       text-decoration: none;
       margin-top: 1rem;
       transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(138, 0, 255, 0.5);
-    }
-
-    .download-btn:hover {
-      background: linear-gradient(145deg, #9d4edd, #b388ff);
-      box-shadow: 0 0 30px rgba(157, 78, 221, 0.7);
-      transform: translateY(-2px);
-    }
-
-    .download-btn.free {
-      background: linear-gradient(145deg, #00ff88, #00994d);
       box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
     }
 
-    .download-btn.free:hover {
+    .download-btn:hover {
       background: linear-gradient(145deg, #00e67a, #00cc66);
       box-shadow: 0 0 30px rgba(0, 230, 122, 0.7);
+      transform: translateY(-2px);
     }
 
     .item-description {
@@ -537,6 +360,94 @@
 
     .spec-value {
       font-size: 0.9rem;
+    }
+
+    /* ===== PHOTO GALLERY STYLES ===== */
+    .photo-gallery {
+      position: relative;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto 1.5rem;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #1a0033;
+      aspect-ratio: 9/16;
+    }
+
+    .gallery-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .gallery-photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .gallery-photo.active {
+      opacity: 1;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(168, 61, 255, 0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-nav:hover {
+      background: rgba(199, 138, 255, 0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .gallery-prev {
+      left: 15px;
+    }
+
+    .gallery-next {
+      right: 15px;
+    }
+
+    .gallery-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .gallery-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-dot.active {
+      background: #a83dff;
+      transform: scale(1.2);
     }
 
     /* ===== FOOTER ===== */
@@ -624,12 +535,12 @@
       /* Header Adjustments */
       header {
         height: auto;
-        min-height: 35vh; /* Reduced from 50vh */
-        padding: 3rem 1rem 1.5rem; /* Even more compact */
+        min-height: 35vh;
+        padding: 3rem 1rem 1.5rem;
       }
   
       .animated-title span {
-        font-size: 2.2rem; /* Slightly larger than mobile-first version */
+        font-size: 2.2rem;
         animation: jump 2s ease-in-out infinite;
       }
   
@@ -662,6 +573,17 @@
 
       .item-specs {
         grid-template-columns: 1fr;
+      }
+
+      /* Photo Gallery */
+      .photo-gallery {
+        aspect-ratio: 4/3;
+      }
+
+      .gallery-nav {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
       }
 
       /* Footer */
@@ -702,14 +624,15 @@
     }
     /* Touch Device Enhancements */
     @media (hover: none) {
-      button, .cta-button, nav a, .download-btn {
+      button, .cta-button, nav a, .download-btn, .gallery-nav {
         transition: transform 0.1s ease;
       }
   
       button:active, 
       .cta-button:active, 
       nav a:active,
-      .download-btn:active {
+      .download-btn:active,
+      .gallery-nav:active {
         transform: scale(0.96);
       }
     }
@@ -717,7 +640,6 @@
     /* iOS-specific fixes */
     @supports (-webkit-touch-callout: none) {
       video {
-        /* iOS sometimes needs this to autoplay */
         -webkit-playsinline: true;
       }
     }
@@ -762,13 +684,24 @@
         <div class="free-tag">FREE</div>
       </div>
       
-      <div class="video-container">
-        <video class="lazy-video" playsinline muted loop preload="metadata" poster="placeholder.jpg" data-src="ferrari.webm">
-          <source type="video/webm">
-          Your browser doesn't support HTML5 video
-        </video>
-        <div class="play-button">▶</div>
-        <div class="loading-spinner"></div>
+      <div class="photo-gallery">
+        <div class="gallery-container">
+          <!-- Replace these with your actual image paths -->
+          <img src="images/ferrari1.jpeg" class="gallery-photo active" alt="Ferrari SF90 Edit 1">
+          <img src="images/ferrari2.jpeg" class="gallery-photo" alt="Ferrari SF90 Edit 2">
+          <img src="images/ferrari3.jpeg" class="gallery-photo" alt="Ferrari SF90 Edit 3">
+          <img src="images/ferrari4.jpeg" class="gallery-photo" alt="Ferrari SF90 Edit 4">
+          
+          <div class="gallery-nav gallery-prev">❮</div>
+          <div class="gallery-nav gallery-next">❯</div>
+          
+          <div class="gallery-dots">
+            <div class="gallery-dot active"></div>
+            <div class="gallery-dot"></div>
+            <div class="gallery-dot"></div>
+            <div class="gallery-dot"></div>
+          </div>
+        </div>
       </div>
       
       <div class="item-description">
@@ -866,109 +799,68 @@
       });
     });
 
-    // Video handling for mobile and desktop
+    // Photo Gallery Functionality
     document.addEventListener('DOMContentLoaded', function() {
-      const videoContainers = document.querySelectorAll('.video-container');
+      // Initialize all galleries on the page
+      document.querySelectorAll('.photo-gallery').forEach(initGallery);
       
-      // Initialize Intersection Observer for lazy loading
-      const lazyVideoObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const container = entry.target;
-            const video = container.querySelector('video');
-            const videoSrc = video.getAttribute('data-src');
-            
-            if (videoSrc) {
-              // Show loading spinner
-              container.classList.add('loading');
-              
-              // Set video source
-              video.querySelector('source').src = videoSrc;
-              video.load();
-              
-              // Attempt to play (muted)
-              const playPromise = video.play();
-              
-              if (playPromise !== undefined) {
-                playPromise
-                  .then(_ => {
-                    // Autoplay worked
-                    container.classList.remove('loading');
-                    container.classList.add('playing');
-                  })
-                  .catch(error => {
-                    // Autoplay was prevented
-                    container.classList.remove('loading');
-                    video.currentTime = 0;
-                  });
-              }
-              
-              // Stop observing this video
-              observer.unobserve(container);
-            }
-          }
-        });
-      }, { rootMargin: '200px' });
-      
-      // Observe all video containers
-      videoContainers.forEach(container => {
-        lazyVideoObserver.observe(container);
+      function initGallery(gallery) {
+        const photos = gallery.querySelectorAll('.gallery-photo');
+        const dots = gallery.querySelectorAll('.gallery-dot');
+        const prevBtn = gallery.querySelector('.gallery-prev');
+        const nextBtn = gallery.querySelector('.gallery-next');
         
-        // Click/tap handler
-        container.addEventListener('click', function() {
-          const video = this.querySelector('video');
+        let currentIndex = 0;
+        
+        // Show current photo
+        function showPhoto(index) {
+          photos.forEach(photo => photo.classList.remove('active'));
+          dots.forEach(dot => dot.classList.remove('active'));
           
-          if (video.paused) {
-            this.classList.add('loading');
-            video.play()
-              .then(_ => {
-                this.classList.remove('loading');
-                this.classList.add('playing');
-              })
-              .catch(error => {
-                this.classList.remove('loading');
-                // If play fails, mute and try again (required for some mobile browsers)
-                video.muted = true;
-                video.play()
-                  .then(_ => {
-                    this.classList.remove('loading');
-                    this.classList.add('playing');
-                  });
-              });
-          } else {
-            video.pause();
-            this.classList.remove('playing');
+          photos[index].classList.add('active');
+          dots[index].classList.add('active');
+          currentIndex = index;
+        }
+        
+        // Next photo
+        function nextPhoto() {
+          let newIndex = currentIndex + 1;
+          if (newIndex >= photos.length) {
+            newIndex = 0;
+          }
+          showPhoto(newIndex);
+        }
+        
+        // Previous photo
+        function prevPhoto() {
+          let newIndex = currentIndex - 1;
+          if (newIndex < 0) {
+            newIndex = photos.length - 1;
+          }
+          showPhoto(newIndex);
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', nextPhoto);
+        prevBtn.addEventListener('click', prevPhoto);
+        
+        // Dot navigation
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => showPhoto(index));
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') {
+            nextPhoto();
+          } else if (e.key === 'ArrowLeft') {
+            prevPhoto();
           }
         });
-      });
-      
-      // Handle page visibility changes
-      document.addEventListener('visibilitychange', function() {
-        if (document.visibilityState === 'visible') {
-          videoContainers.forEach(container => {
-            const video = container.querySelector('video');
-            if (container.classList.contains('playing') && video.paused) {
-              video.play().catch(e => console.log('Playback interrupted'));
-            }
-          });
-        }
-      });
-      
-      // iOS specific touch event
-      document.addEventListener('touchstart', function init() {
-        videoContainers.forEach(container => {
-          const video = container.querySelector('video');
-          video.muted = true;
-          video.play().catch(e => console.log('Initial autoplay prevented'));
-        });
-        document.removeEventListener('touchstart', init);
-      }, { once: true });
-    });
-
-    document.querySelectorAll('video').forEach(video => {
-      video.addEventListener('loadeddata', function() {
-        this.classList.add('loaded');
-      });
+        
+        // Auto-advance (optional)
+        // setInterval(nextPhoto, 3000);
+      }
     });
   </script>
 </body>
