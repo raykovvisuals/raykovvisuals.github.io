@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>raykov.visuals</title>
+  <title>raykov.visuals | Shop</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
     /* ===== GLOBAL STYLES ===== */
@@ -424,94 +424,119 @@
       }
     }
 
-    /* ===== BEFORE & AFTER SLIDER ===== */
-    .ba-inline-container {
-      position: relative;
-      max-width: 400px;
-      margin: 0;
-      overflow: hidden;
+    /* ===== SHOP ITEM STYLES ===== */
+    .shop-item {
+      background: rgba(20, 0, 40, 0.8);
       border-radius: 16px;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(106, 0, 168, 0.4);
+      box-shadow: 0 0 20px rgba(106, 0, 168, 0.2);
+      backdrop-filter: blur(15px);
+      position: relative;
+      overflow: hidden;
     }
 
-    .ba-img {
-      width: 100%;
-      display: block;
-      user-select: none;
-    }
-
-    .ba-img-before {
+    .shop-item::before {
+      content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      clip-path: inset(0 50% 0 0);
-      transition: clip-path 0.2s ease-out;
-      z-index: 2;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #4a006a, #000000);
+      box-shadow: 0 0 30px rgba(157, 0, 255, 0.4);
+      background-size: 200% 200%;
+      z-index: -1;
+      border-radius: 18px;
+      animation: gradientBorder 3s ease infinite;
     }
 
-    .ba-label {
-      position: absolute;
-      top: 10px;
-      padding: 6px 12px;
+    .shop-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .shop-item-title {
+      margin: 0;
+      color: #b388ff;
+    }
+
+    .price-tag {
+      background: linear-gradient(145deg, #8a00ff, #6a00a8);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
       font-weight: bold;
+      box-shadow: 0 0 15px rgba(138, 0, 255, 0.5);
+    }
+
+    .free-tag {
+      background: linear-gradient(145deg, #00ff88, #00994d);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+    }
+
+    .download-btn {
+      display: inline-block;
+      background: linear-gradient(145deg, #8a00ff, #6a00a8);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(138, 0, 255, 0.5);
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(145deg, #9d4edd, #b388ff);
+      box-shadow: 0 0 30px rgba(157, 78, 221, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .download-btn.free {
+      background: linear-gradient(145deg, #00ff88, #00994d);
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    }
+
+    .download-btn.free:hover {
+      background: linear-gradient(145deg, #00e67a, #00cc66);
+      box-shadow: 0 0 30px rgba(0, 230, 122, 0.7);
+    }
+
+    .item-description {
+      margin: 1rem 0;
+      line-height: 1.6;
+    }
+
+    .item-specs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .spec-item {
+      background: rgba(30, 0, 60, 0.5);
+      padding: 0.8rem;
+      border-radius: 10px;
+      border-left: 3px solid #9d00ff;
+    }
+
+    .spec-title {
+      font-weight: bold;
+      color: #b388ff;
       font-size: 0.9rem;
-      background: rgba(18, 0, 30, 0.7);
-      color: #f0eaff;
-      border-radius: 8px;
-      z-index: 3;
-      pointer-events: none;
+      margin-bottom: 0.3rem;
     }
 
-    .ba-label-before {
-      left: 10px;
-    }
-
-    .ba-label-after {
-      right: 10px;
-    }
-
-    .ba-slider {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 12px;
-      background: rgba(199, 70, 224, 0.8);
-      border-radius: 6px;
-      appearance: none;
-      outline: none;
-      z-index: 4;
-      cursor: pointer;
-    }
-
-    .ba-slider::-webkit-slider-thumb {
-      appearance: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #000;
-      border: 2px solid #c300ff;
-      box-shadow: 0 0 10px rgba(195, 0, 255, 0.9);
-      transition: background 0.3s ease;
-    }
-
-    .ba-slider::-webkit-slider-thumb:hover {
-      background: #b700ff;
-    }
-
-    .ba-slider::-moz-range-thumb {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: white;
-      border: 2px solid #ae00ff;
-      box-shadow: 0 0 8px rgba(195, 0, 255, 0.9);
-      transition: background 0.3s ease;
-    }
-
-    .ba-slider::-moz-range-thumb:hover {
-      background: #cc00ff;
+    .spec-value {
+      font-size: 0.9rem;
     }
 
     /* ===== FOOTER ===== */
@@ -571,81 +596,6 @@
       transform: translateY(-2px);
     }
 
-    /* ===== FORM STYLES ===== */
-    form input[type="text"],
-    form input[type="email"],
-    form textarea {
-      background-color: #140026;
-      color: #f0eaff;
-      border: 1px solid #6a00a8;
-      box-shadow: none;
-      border-radius: 8px;
-      padding: 8px;
-      margin-bottom: 12px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    form input[type="text"]:focus,
-    form input[type="email"]:focus,
-    form textarea:focus {
-      outline: none;
-      border-color: #9d00ff;
-      box-shadow: 0 0 12px #9d00ff;
-      background-color: #3b2a5a;
-    }
-
-    form label {
-      display: block;
-      margin-bottom: 4px;
-      font-weight: 600;
-    }
-
-    form button {
-      background: linear-gradient(145deg, #9d00ff, #4b0078);
-      border: none;
-      border-radius: 20px;
-      padding: 12px 25px;
-      color: rgb(255, 255, 255);
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(157, 0, 255, 0.6);
-      transition: background 0.3s ease;
-    }
-
-    form button:hover {
-      background: linear-gradient(145deg, #ff9ee6, #d99aff);
-    }
-
-    #form-status {
-      all: unset;
-      display: block;
-      margin-top: 1rem;
-      color: #90ee90;
-      font-weight: 500;
-    }
-
-    .reel {
-    flex-direction: column;
-  }
-  
-  .video-wrapper {
-    width: 100%;
-  }
-  
-  /* Show fallback if video doesn't autoplay */
-  .video-wrapper video[poster] + .fallback-message {
-    display: block;
-  }
-
-    video {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    video.loaded {
-      opacity: 1;
-    }
-
     /* ===== COMPREHENSIVE MOBILE STYLES ===== */
     @media (max-width: 768px) {
       /* Global Adjustments */
@@ -699,83 +649,24 @@
         width: 100%;
       }
 
-      /* Video Reel Section */
-      .reel {
+      /* Shop Items */
+      .shop-item {
+        padding: 1.2rem;
+      }
+
+      .shop-item-header {
         flex-direction: column;
-        align-items: center;
-        padding: 1rem 0;
-        gap: 1.5rem;
-      }
-  
-      .video-size {
-        width: 90%;
-        max-width: 100%;
+        align-items: flex-start;
+        gap: 1rem;
       }
 
-      /* Packages Section */
-      .section {
-        padding: 2rem 1rem;
-      }
-  
-      .package {
-        margin-bottom: 1.5rem;
-      }
-
-      /* Before/After Slider */
-      .ba-inline-container {
-        max-width: 100%;
-      }
-  
-      .ba-slider {
-        height: 16px;
-        width: 90%;
-      }
-  
-      .ba-slider::-webkit-slider-thumb {
-        width: 28px;
-        height: 28px;
-      }
-
-      /* Form Adjustments */
-      form input,
-      form textarea {
-        font-size: 16px;
-        padding: 10px;
-      }
-  
-      form button {
-        width: 100%;
-        padding: 14px;
+      .item-specs {
+        grid-template-columns: 1fr;
       }
 
       /* Footer */
       footer {
        padding: 1.5rem;
-      }
-
-      /* CTA Button */
-      .cta-button {
-        position: relative;
-        bottom: auto;
-        right: auto;
-        margin: 0.8rem 0 0 0;
-        width: auto;
-        display: inline-block;
-        padding: 12px 24px;
-        font-size: 0.95rem;
-        z-index: 100;
-      }
-
-      .scrolldown-indicator {
-        position: relative;
-        margin: 1rem auto 0;
-        bottom: auto;
-      }
-
-      /* Scroll to Top Button */
-      #scrollToTop {
-        bottom: 80px;
-        right: 20px;
       }
 
       /* Section Dividers */
@@ -805,50 +696,21 @@
         font-size: 0.8rem;
       }
   
-      .package h3 {
-        font-size: 1.2rem;
-      }
-  
-      .animated-title span {
-        font-size: 2rem;
-      }
-
       .section {
         padding: 1.5rem 0.8rem;
-      }
-    
-
-     .cta-button {
-        padding: 10px 20px;
-        font-size: 0.8rem;
-        margin: 0.8rem 0 0 0;
       }
     }
     /* Touch Device Enhancements */
     @media (hover: none) {
-      button, .cta-button, nav a {
+      button, .cta-button, nav a, .download-btn {
         transition: transform 0.1s ease;
       }
   
       button:active, 
       .cta-button:active, 
-      nav a:active {
+      nav a:active,
+      .download-btn:active {
         transform: scale(0.96);
-      }
-  
-      .video-size:hover {
-        transform: none;
-        box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
-      }
-    }
-
-    @media (min-width: 769px) {
-      .reel {
-        flex-direction: row; /* Side by side on desktop */
-        justify-content: center;
-      }
-      .video-size {
-        width: 30%;
       }
     }
 
@@ -869,11 +731,10 @@
 
   <!-- NAVIGATION -->
   <nav>
-    <a href="#packages">Packages</a>
-    <a href="shop.html">Shop</a>
-    <a href="#reel">Reel</a>
-    <a href="#why">Why Me</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="index.html#packages">Packages</a>
+    <a href="index.html#contact">Contact</a>
   </nav>
 
   <!-- HERO SECTION -->
@@ -882,154 +743,65 @@
       <h1 class="animated-title">
         <span>r</span><span>a</span><span>y</span><span>k</span><span>o</span><span>v</span><span>.</span><span>v</span><span>i</span><span>s</span><span>u</span><span>a</span><span>l</span><span>s</span>
       </h1>
-      <p class="hero-subtitle">Cinematic Automotive Storytelling</p>
-      <a href="#contact" class="cta-button" id="book-shoot-button">Book Your Shoot</a>
+      <p class="hero-subtitle">Premium Automotive Content</p>
     </div>
     <div class="scrolldown-indicator">
       <span></span>
     </div>
   </header>
 
-  <!-- REEL SECTION -->
-  <section id="reel" class="section fade-in-on-scroll">
-  <h2>🎞 Showreel</h2>
-  <div class="reel">
-    <!-- Video 1 -->
-    <div class="video-container">
-      <video class="lazy-video" playsinline muted loop preload="metadata" poster="placeholder.jpg" data-src="ferrari.webm">
-        <source type="video/webm">
-        Your browser doesn't support HTML5 video
-      </video>
-      <div class="play-button">▶</div>
-      <div class="loading-spinner"></div>
+  <!-- SHOP SECTION -->
+  <section id="shop" class="section fade-in-on-scroll">
+    <h2>🛒 Content Shop</h2>
+    <p>Download high-quality automotive clips for your projects. All clips are professionally stabilized and color graded.</p>
+    
+    <!-- Ferrari SF90 Item -->
+    <div class="shop-item">
+      <div class="shop-item-header">
+        <h3 class="shop-item-title">Ferrari SF90 - Stabilized + Color Graded</h3>
+        <div class="free-tag">FREE</div>
+      </div>
+      
+      <div class="video-container">
+        <video class="lazy-video" playsinline muted loop preload="metadata" poster="placeholder.jpg" data-src="ferrari.webm">
+          <source type="video/webm">
+          Your browser doesn't support HTML5 video
+        </video>
+        <div class="play-button">▶</div>
+        <div class="loading-spinner"></div>
+      </div>
+      
+      <div class="item-description">
+        <p>High-quality stabilized and color graded clip of a Ferrari SF90. Perfect for automotive edits, social media content, or as a background element in your projects.</p>
+      </div>
+      
+      <div class="item-specs">
+        <div class="spec-item">
+          <div class="spec-title">Resolution</div>
+          <div class="spec-value">1080P FHD</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-title">FPS</div>
+          <div class="spec-value">30fps</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-title">Format</div>
+          <div class="spec-value">MP4 (H.264)</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-title">Number of clips</div>
+          <div class="spec-value">11</div>
+        </div>
+      </div>
+
+      <a href="YOUR_DOWNLOAD_LINK_HERE" class="download-btn free" download="Ferrari_SF90_Stabilized_ColorGraded.mp4">Download Now</a>
     </div>
     
-    <!-- Video 2 -->
-    <div class="video-container">
-      <video class="lazy-video" playsinline muted loop preload="metadata" poster="placeholder.jpg" data-src="amg e63.webm">
-        <source type="video/webm">
-        Your browser doesn't support HTML5 video
-      </video>
-      <div class="play-button">▶</div>
-      <div class="loading-spinner"></div>
-    </div>
+    <!-- More items can be added here as needed -->
     
-    <!-- Video 3 -->
-    <div class="video-container">
-      <video class="lazy-video" playsinline muted loop preload="metadata" poster="placeholder.jpg" data-src="spyder rs.webm">
-        <source type="video/webm">
-        Your browser doesn't support HTML5 video
-      </video>
-      <div class="play-button">▶</div>
-      <div class="loading-spinner"></div>
+    <div class="section-note">
+      <p>More clips coming soon! Check back regularly for new content additions.</p>
     </div>
-  </div>
-</section>
-
-  <!-- PACKAGES SECTION -->
-  <section id="packages" class="section fade-in-on-scroll">
-    <h2>📦 Content Packages</h2>
-    <p class="section-intro">Professional content creation tailored for social media, business promotion, and personal branding. All packages include professional editing and delivery within 3 business days.</p>
-    
-    <div class="package highlight">
-      <h3>Quick Shoot – <span class="price">40 BGN</span></h3>
-      <p class="package-description">Perfect for when you need quality content fast</p>
-      <ul>
-        <li>✔️ 5 professionally edited high-res photos</li>
-        <li>✔️ 1 engaging cinematic video (under 30s optimized for TikTok/IG)</li>
-        <li>✔️ Basic color correction</li>
-      </ul>
-    </div>
-    
-    <div class="package popular">
-      <div class="popular-badge">MOST POPULAR</div>
-      <h3>Full Content Package – <span class="price">80 BGN</span></h3>
-      <p class="package-description">Complete social media content solution</p>
-      <ul>
-        <li>✔️ 10+ professionally edited photos</li>
-        <li>✔️ 1 dynamic speedramp video (10–30 sec)</li>
-        <li>✔️ Premium music synchronization</li>
-        <li>✔️ Advanced color grading & effects</li>
-        <li>✔️ Multiple format options</li>
-      </ul>
-    </div>
-    
-    <div class="package">
-      <h3>Business Promo – <span class="price">120 BGN</span></h3>
-      <p class="package-description">Elevate your brand with professional marketing content</p>
-      <ul>
-        <li>✔️ 10–30 second promotional video</li>
-        <li>✔️ 10+ high-quality branded photos</li>
-        <li>✔️ Custom logo integration</li>
-        <li>✔️ Animated text overlays</li>
-        <li>✔️ Multiple social media formats (Stories, Reels, Feed)</li>
-        <li>✔️ 1 round of revisions included</li>
-      </ul>
-    </div>
-    
-    <p class="note">* Custom packages available upon request. Additional locations may incur extra charges.</p>
-</section>
-
-  <!-- WHY ME SECTION -->
-  <section id="why" class="section fade-in-on-scroll">
-    <h2>🚀 Why Me?</h2>
-    <ul>
-      <li>Professional video editing in After Effects</li>
-      <li>Real experience with car owners & businesses</li>
-      <li>Affordable pricing while I grow my portfolio</li>
-    </ul>
-  </section>
-
-  <!-- BEFORE & AFTER SLIDER -->
-  <section id="before-after" class="section fade-in-on-scroll">
-    <h2>🛠 Before & After Slider</h2>
-    <div class="ba-inline-container">
-      <img src="images/after.jpg" alt="After" class="ba-img">
-      <span class="ba-label ba-label-after">After</span>
-
-      <img src="images/before.jpg" alt="Before" class="ba-img ba-img-before">
-      <span class="ba-label ba-label-before">Before</span>
-
-      <input type="range" min="0" max="100" value="50" class="ba-slider"
-        oninput="document.querySelector('.ba-img-before').style.clipPath = 'inset(0 ' + (100 - this.value) + '% 0 0)'">
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section id="contact" class="section fade-in-on-scroll">
-    <h2>📩 Contact</h2>
-
-    <p>Instagram: <a href="https://instagram.com/raykov.visuals" target="_blank">@raykov.visuals</a></p>
-    <p>TikTok: <a href="https://tiktok.com/@raykov.visuals" target="_blank">@raykov.visuals</a></p>
-    <p>Email: <a href="mailto:raykov.visuals@gmail.com">raykov.visuals@gmail.com</a></p>
-    <p>DM me to book a shoot or ask anything!</p>
-
-    <hr style="margin: 2rem 0; border-color: rgba(255, 255, 255, 0.1);" />
-
-    <h2>Contact Me</h2>
-    <p>Want to work together?</p>
-    <form id="contact-form"
-      action="https://formspree.io/f/xqaqnpby"
-      method="POST"
-      style="width: 100%;">
-      <label for="fname">First Name <span style="color:#ff66cc;">*</span></label>
-      <input type="text" id="fname" name="First Name" required />
-
-      <label for="lname">Last Name</label>
-      <input type="text" id="lname" name="Last Name" />
-
-      <label for="email">Email <span style="color:#ff66cc;">*</span></label>
-      <input type="email" id="email" name="Email" required />
-
-      <label for="subject">Subject <span style="color:#ff66cc;">*</span></label>
-      <input type="text" id="subject" name="Subject" required />
-
-      <label for="message">Message <span style="color:#ff66cc;">*</span></label>
-      <textarea id="message" name="Message" required rows="6"></textarea>
-
-      <button type="submit">Inquire</button>
-      <p id="form-status" style="margin-top: 1rem; color: #90ee90;"></p>
-    </form>
   </section>
 
   <!-- FOOTER -->
@@ -1093,165 +865,111 @@
         }
       });
     });
-    
-    // Smooth scroll for Book Your Shoot button to the form section
-    document.querySelector('.cta-button').addEventListener('click', function(e) {
-      e.preventDefault();
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        // Calculate position of form within contact section
-        const formHeading = contactSection.querySelector('h2:last-of-type');
-        const offset = 60; // Nav offset
-        const targetPosition = contactSection.offsetTop + formHeading.offsetTop - offset;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
 
-    // Form submission
-    document.getElementById("contact-form").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const form = e.target;
-      const data = new FormData(form);
-      const status = document.getElementById("form-status");
-
-      try {
-        const response = await fetch(form.action, {
-          method: form.method,
-          body: data,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          status.textContent = "Message sent successfully!";
-          status.style.color = "#90ee90";
-          form.reset();
-        } else {
-          const resData = await response.json();
-          status.textContent = resData.errors ? resData.errors.map(e => e.message).join(", ") : "Oops! There was a problem.";
-          status.style.color = "#ff6666";
-        }
-      } catch (error) {
-        status.textContent = "Oops! There was a problem submitting your form.";
-        status.style.color = "#ff6666";
-      }
-    });
-
-    // Detect mobile and load lighter assets
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      document.querySelectorAll('video').forEach(vid => {
-        vid.src = vid.src.replace('.mp4', '-mobile.mp4');
-      });
-     }
-
-     // Video handling for mobile and desktop
-document.addEventListener('DOMContentLoaded', function() {
-  const videoContainers = document.querySelectorAll('.video-container');
-  
-  // Initialize Intersection Observer for lazy loading
-  const lazyVideoObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const container = entry.target;
-        const video = container.querySelector('video');
-        const videoSrc = video.getAttribute('data-src');
-        
-        if (videoSrc) {
-          // Show loading spinner
-          container.classList.add('loading');
-          
-          // Set video source
-          video.querySelector('source').src = videoSrc;
-          video.load();
-          
-          // Attempt to play (muted)
-          const playPromise = video.play();
-          
-          if (playPromise !== undefined) {
-            playPromise
-              .then(_ => {
-                // Autoplay worked
-                container.classList.remove('loading');
-                container.classList.add('playing');
-              })
-              .catch(error => {
-                // Autoplay was prevented
-                container.classList.remove('loading');
-                video.currentTime = 0;
-              });
-          }
-          
-          // Stop observing this video
-          observer.unobserve(container);
-        }
-      }
-    });
-  }, { rootMargin: '200px' });
-  
-  // Observe all video containers
-  videoContainers.forEach(container => {
-    lazyVideoObserver.observe(container);
-    
-    // Click/tap handler
-    container.addEventListener('click', function() {
-      const video = this.querySelector('video');
+    // Video handling for mobile and desktop
+    document.addEventListener('DOMContentLoaded', function() {
+      const videoContainers = document.querySelectorAll('.video-container');
       
-      if (video.paused) {
-        this.classList.add('loading');
-        video.play()
-          .then(_ => {
-            this.classList.remove('loading');
-            this.classList.add('playing');
-          })
-          .catch(error => {
-            this.classList.remove('loading');
-            // If play fails, mute and try again (required for some mobile browsers)
-            video.muted = true;
+      // Initialize Intersection Observer for lazy loading
+      const lazyVideoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const container = entry.target;
+            const video = container.querySelector('video');
+            const videoSrc = video.getAttribute('data-src');
+            
+            if (videoSrc) {
+              // Show loading spinner
+              container.classList.add('loading');
+              
+              // Set video source
+              video.querySelector('source').src = videoSrc;
+              video.load();
+              
+              // Attempt to play (muted)
+              const playPromise = video.play();
+              
+              if (playPromise !== undefined) {
+                playPromise
+                  .then(_ => {
+                    // Autoplay worked
+                    container.classList.remove('loading');
+                    container.classList.add('playing');
+                  })
+                  .catch(error => {
+                    // Autoplay was prevented
+                    container.classList.remove('loading');
+                    video.currentTime = 0;
+                  });
+              }
+              
+              // Stop observing this video
+              observer.unobserve(container);
+            }
+          }
+        });
+      }, { rootMargin: '200px' });
+      
+      // Observe all video containers
+      videoContainers.forEach(container => {
+        lazyVideoObserver.observe(container);
+        
+        // Click/tap handler
+        container.addEventListener('click', function() {
+          const video = this.querySelector('video');
+          
+          if (video.paused) {
+            this.classList.add('loading');
             video.play()
               .then(_ => {
                 this.classList.remove('loading');
                 this.classList.add('playing');
+              })
+              .catch(error => {
+                this.classList.remove('loading');
+                // If play fails, mute and try again (required for some mobile browsers)
+                video.muted = true;
+                video.play()
+                  .then(_ => {
+                    this.classList.remove('loading');
+                    this.classList.add('playing');
+                  });
               });
+          } else {
+            video.pause();
+            this.classList.remove('playing');
+          }
+        });
+      });
+      
+      // Handle page visibility changes
+      document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+          videoContainers.forEach(container => {
+            const video = container.querySelector('video');
+            if (container.classList.contains('playing') && video.paused) {
+              video.play().catch(e => console.log('Playback interrupted'));
+            }
           });
-      } else {
-        video.pause();
-        this.classList.remove('playing');
-      }
-    });
-  });
-  
-  // Handle page visibility changes
-  document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'visible') {
-      videoContainers.forEach(container => {
-        const video = container.querySelector('video');
-        if (container.classList.contains('playing') && video.paused) {
-          video.play().catch(e => console.log('Playback interrupted'));
         }
       });
-    }
-  });
-  
-  // iOS specific touch event
-  document.addEventListener('touchstart', function init() {
-    videoContainers.forEach(container => {
-      const video = container.querySelector('video');
-      video.muted = true;
-      video.play().catch(e => console.log('Initial autoplay prevented'));
+      
+      // iOS specific touch event
+      document.addEventListener('touchstart', function init() {
+        videoContainers.forEach(container => {
+          const video = container.querySelector('video');
+          video.muted = true;
+          video.play().catch(e => console.log('Initial autoplay prevented'));
+        });
+        document.removeEventListener('touchstart', init);
+      }, { once: true });
     });
-    document.removeEventListener('touchstart', init);
-  }, { once: true });
-});
 
-document.querySelectorAll('video').forEach(video => {
-  video.addEventListener('loadeddata', function() {
-    this.classList.add('loaded');
-  });
-});
+    document.querySelectorAll('video').forEach(video => {
+      video.addEventListener('loadeddata', function() {
+        this.classList.add('loaded');
+      });
+    });
   </script>
 </body>
 </html>
