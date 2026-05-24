@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAYKOV VISUALS</title>
+<link href="https://fonts.cdnfonts.com/css/cloister-black" rel="stylesheet">
+<style>
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+:root {
+  --font-sans:   'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+  --font-black:  'Cloister Black','Cinzel Decorative',serif;
+  --radius-card: 28px;
+  --dur:         0.4s;
+}
+
+/* ── LIGHT (blue-white) ── */
+:root,[data-theme="light"] {
+  --bg:               #edf1f9;
+  --bg-card:          rgba(255,255,255,0.56);
+  --bg-card-h:        rgba(255,255,255,0.74);
+  --nav-bg:           rgba(230,238,255,0.58);
+  --strip-bg:         rgba(180,205,255,0.07);
+  --border:           rgba(100,140,230,0.14);
+  --border-h:         rgba(70,120,230,0.24);
+  --text:             #060e20;
+  --text2:            rgba(8,20,65,0.48);
+  --text3:            rgba(8,20,65,0.28);
+  --tag-bg:           rgba(100,140,230,0.07);
+  --btn-bg:           rgba(110,150,235,0.09);
+  --btn-bg-h:         rgba(90,130,230,0.16);
+  --btn-c:            rgba(10,30,100,0.65);
+  --divider:          linear-gradient(to bottom,rgba(80,120,230,0.22),transparent);
+  --chrome:           linear-gradient(135deg,#555,#1a1a1a 25%,#999 45%,#2a2a2a 65%,#777 85%,#111);
+  --shadow:           0 8px 32px rgba(50,90,200,0.10),0 2px 8px rgba(50,90,200,0.06);
+  --shadow-h:         0 24px 64px rgba(50,90,200,0.18),0 4px 16px rgba(50,90,200,0.10);
+  --glass-top:        rgba(255,255,255,0.90);
+  /* controls */
+  --ctrl-bg:          rgba(215,230,255,0.50);
+  --ctrl-border:      rgba(130,170,255,0.32);
+  --ctrl-shine:       rgba(255,255,255,0.90);
+  --ctrl-inner-glow:  rgba(150,190,255,0.25);
+  --ctrl-pill:        linear-gradient(145deg,#2a4dbe,#4a72e8);
+  --ctrl-pill-s:      0 2px 10px rgba(40,70,210,0.38),0 1px 3px rgba(40,70,210,0.22);
+  --ctrl-text-on:     #ffffff;
+  --ctrl-text-off:    rgba(20,45,110,0.52);
+  /* scrollbar */
+  --sb-thumb:         rgba(90,130,230,0.38);
+  --sb-track:         rgba(130,170,255,0.08);
+  /* cursor */
+  --cur-dot:          #2a4dbe;
+  --cur-ring:         rgba(60,100,230,0.32);
+}
+
+/* ── DARK (blue-black) ── */
+[data-theme="dark"] {
+  --bg:               #04070f;
+  --bg-card:          rgba(12,28,70,0.32);
+  --bg-card-h:        rgba(18,40,95,0.42);
+  --nav-bg:           rgba(5,10,28,0.62);
+  --strip-bg:         rgba(20,50,120,0.10);
+  --border:           rgba(60,110,220,0.18);
+  --border-h:         rgba(80,140,255,0.30);
+  --text:             #dde8ff;
+  --text2:            rgba(170,200,255,0.52);
+  --text3:            rgba(150,185,255,0.30);
+  --tag-bg:           rgba(50,100,210,0.13);
+  --btn-bg:           rgba(30,65,180,0.14);
+  --btn-bg-h:         rgba(40,85,210,0.22);
+  --btn-c:            rgba(170,210,255,0.72);
+  --divider:          linear-gradient(to bottom,rgba(90,150,255,0.28),transparent);
+  --chrome:           linear-gradient(135deg,#bbb,#eee 20%,#777 42%,#ddd 62%,#999 82%,#fff);
+  --shadow:           0 8px 40px rgba(0,5,30,0.72),0 2px 8px rgba(0,5,30,0.50);
+  --shadow-h:         0 32px 80px rgba(0,5,40,0.92),0 4px 24px rgba(0,5,40,0.72);
+  --glass-top:        rgba(80,140,255,0.15);
+  /* controls */
+  --ctrl-bg:          rgba(14,35,100,0.48);
+  --ctrl-border:      rgba(70,130,255,0.28);
+  --ctrl-shine:       rgba(90,160,255,0.18);
+  --ctrl-inner-glow:  rgba(60,120,255,0.14);
+  --ctrl-pill:        linear-gradient(145deg,#071538,#0e2870);
+  --ctrl-pill-s:      0 2px 10px rgba(5,20,100,0.70),0 1px 3px rgba(5,20,100,0.50);
+  --ctrl-text-on:     #a0c8ff;
+  --ctrl-text-off:    rgba(130,180,255,0.48);
+  /* scrollbar */
+  --sb-thumb:         rgba(60,110,230,0.42);
+  --sb-track:         rgba(20,50,120,0.14);
+  /* cursor */
+  --cur-dot:          #4a88ff;
+  --cur-ring:         rgba(70,130,255,0.28);
+}
+
+/* ── RESET ── */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--text);
+  font-family:var(--font-sans); overflow-x:hidden; cursor:none;
+  -webkit-font-smoothing:antialiased;
+}
+body * { transition:background-color .5s cubic-bezier(.4,0,.2,1),border-color .5s cubic-bezier(.4,0,.2,1),color .5s cubic-bezier(.4,0,.2,1),box-shadow .5s cubic-bezier(.4,0,.2,1),opacity .4s cubic-bezier(.4,0,.2,1); }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:var(--sb-track); border-radius:10px; }
+::-webkit-scrollbar-thumb {
+  background:var(--sb-thumb); border-radius:10px;
+  border:1px solid var(--ctrl-border);
+  transition:background .3s;
+}
+::-webkit-scrollbar-thumb:hover { background:var(--ctrl-pill); }
+* { scrollbar-width:thin; scrollbar-color:var(--sb-thumb) var(--sb-track); }
+
+/* ── CURSOR ── */
+#cursor {
+  width:11px; height:11px;
+  background:var(--cur-dot);
+  border-radius:50%; position:fixed; top:0; left:0;
+  pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 14px var(--cur-dot),0 0 5px var(--cur-dot);
+  transition:width .5s cubic-bezier(.34,1.56,.64,1),height .5s cubic-bezier(.34,1.56,.64,1),background .5s,box-shadow .5s,opacity .3s;
+  will-change:left,top;
+}
+#cursor.big { width:17px; height:17px; }
+#cursorRing {
+  width:38px; height:38px;
+  border:1.5px solid var(--cur-ring);
+  border-radius:50%; position:fixed; top:0; left:0;
+  pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%);
+  backdrop-filter:blur(2px);
+  background:radial-gradient(circle,var(--ctrl-inner-glow) 0%,transparent 70%);
+  transition:width .5s cubic-bezier(.34,1.56,.64,1),height .5s cubic-bezier(.34,1.56,.64,1),border-color .5s,background .5s;
+  will-change:left,top;
+}
+#cursorRing.big { width:58px; height:58px; }
+
+/* ── NOISE ── */
+body::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.32;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+}
+
+/* ── ORBS ── */
+.orb { position:fixed; border-radius:50%; pointer-events:none; z-index:0; animation:orbFloat 14s ease-in-out infinite; }
+.orb1 { width:700px;height:700px;top:-250px;left:-200px;background:radial-gradient(circle,rgba(80,120,240,.07) 0%,transparent 68%);filter:blur(80px); }
+.orb2 { width:500px;height:500px;bottom:0;right:-150px;background:radial-gradient(circle,rgba(60,100,220,.05) 0%,transparent 68%);filter:blur(100px);animation-delay:-7s; }
+.orb3 { width:300px;height:300px;top:40%;left:40%;background:radial-gradient(circle,rgba(100,150,255,.04) 0%,transparent 68%);filter:blur(60px);animation-delay:-3s; }
+@keyframes orbFloat { 0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-50px) scale(1.06);} }
+
+/* ── NAVBAR ── */
+nav {
+  position:fixed; inset:12px 12px auto; z-index:200; height:56px; border-radius:20px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 24px;
+  background:var(--nav-bg);
+  backdrop-filter:blur(56px) saturate(220%);
+  -webkit-backdrop-filter:blur(56px) saturate(220%);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  animation:navDrop .9s cubic-bezier(.16,1,.3,1) both;
+}
+nav::before {
+  content:''; position:absolute; inset:0 0 auto; height:1px;
+  background:linear-gradient(90deg,transparent,var(--glass-top),transparent);
+  border-radius:20px 20px 0 0; pointer-events:none;
+}
+@keyframes navDrop { from{transform:translateY(-110%) scale(.97);opacity:0;}to{transform:translateY(0) scale(1);opacity:1;} }
+.nav-logo {
+  font-family:var(--font-black); font-size:1rem; letter-spacing:.07em;
+  background:var(--chrome); background-size:200% 200%;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  cursor:none; flex-shrink:0; animation:chromeShift 7s ease-in-out infinite;
+}
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a { color:var(--text2);text-decoration:none;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;cursor:none; }
+.nav-links a:hover { color:var(--text); }
+.nav-controls { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+
+/* ── LIQUID GLASS CONTROL BASE ── */
+.ctrl-glass {
+  position:relative; cursor:none; flex-shrink:0;
+  background:var(--ctrl-bg);
+  border:1px solid var(--ctrl-border);
+  backdrop-filter:blur(32px) saturate(180%);
+  -webkit-backdrop-filter:blur(32px) saturate(180%);
+  overflow:hidden;
+  box-shadow:
+    inset 0 1px 0 var(--ctrl-shine),
+    inset 0 -1px 0 var(--ctrl-inner-glow),
+    0 4px 16px rgba(0,0,0,0.12),
+    0 1px 4px rgba(0,0,0,0.08);
+  transition:box-shadow var(--dur), border-color var(--dur), background var(--dur);
+}
+.ctrl-glass:hover {
+  border-color:var(--border-h);
+  box-shadow:
+    inset 0 1px 0 var(--ctrl-shine),
+    inset 0 -1px 0 var(--ctrl-inner-glow),
+    0 6px 24px rgba(0,0,0,0.18),
+    0 2px 6px rgba(0,0,0,0.10);
+}
+/* top glint line */
+.ctrl-glass::before {
+  content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
+  background:linear-gradient(90deg,transparent,var(--ctrl-shine),transparent);
+  pointer-events:none; z-index:4;
+}
+/* bottom glow */
+.ctrl-glass::after {
+  content:''; position:absolute; bottom:0; left:15%; right:15%; height:1px;
+  background:linear-gradient(90deg,transparent,var(--ctrl-inner-glow),transparent);
+  pointer-events:none; z-index:4;
+}
+
+/* ── LANG TOGGLE ── */
+.lang-toggle {
+  height:28px; width:70px; border-radius:100px;
+  display:flex; align-items:center;
+}
+.lang-pill {
+  position:absolute; top:3px; left:3px;
+  width:calc(50% - 3px); height:calc(100% - 6px);
+  background:var(--ctrl-pill); border-radius:100px; pointer-events:none; z-index:2;
+  box-shadow:var(--ctrl-pill-s);
+  transition:transform .42s cubic-bezier(.34,1.2,.64,1);
+}
+[data-lang="bg"] .lang-pill { transform:translateX(calc(70px * .5 - 3px)); }
+.lang-track {
+  display:flex; width:200%; height:100%; position:relative; z-index:3;
+  transition:transform .42s cubic-bezier(.34,1.2,.64,1);
+}
+[data-lang="bg"] .lang-track { transform:translateX(-50%); }
+.lang-slide {
+  width:50%; height:100%; display:flex; align-items:center; justify-content:center;
+  font-size:.58rem; font-weight:700; letter-spacing:.18em; pointer-events:none; flex-shrink:0;
+  color:var(--ctrl-text-off);
+  transition:color var(--dur);
+}
+[data-lang="en"] .lang-slide:first-child { color:var(--ctrl-text-on); }
+[data-lang="bg"] .lang-slide:last-child  { color:var(--ctrl-text-on); }
+
+/* ── THEME TOGGLE ── */
+.theme-toggle { height:28px; width:50px; border-radius:100px; }
+.theme-toggle::after {
+  content:''; position:absolute; top:4px; left:4px; z-index:3;
+  width:18px; height:18px;
+  background:var(--ctrl-pill); border-radius:50%;
+  box-shadow:var(--ctrl-pill-s);
+  transition:transform .42s cubic-bezier(.34,1.56,.64,1);
+}
+[data-theme="dark"] .theme-toggle::after { transform:translateX(22px); }
+.toggle-icons {
+  position:absolute; inset:0; z-index:3;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 6px; pointer-events:none; font-size:9px;
+}
+
+/* ── HERO ── */
+.hero {
+  position:relative; min-height:65vh; z-index:2;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:100px 40px 0; overflow:hidden;
+}
+.hero-eyebrow { font-size:.68rem;letter-spacing:.38em;text-transform:uppercase;color:var(--text3);margin-bottom:28px;animation:fadeUp 1.1s .25s both; }
+.hero-title {
+  font-family:var(--font-black); font-weight:900;
+  font-size:clamp(3.2rem,11vw,9rem); line-height:.92; letter-spacing:-.02em;
+  background:var(--chrome); background-size:200% 200%;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  animation:fadeUp 1.2s .45s both,chromeShift 8s ease-in-out infinite;
+}
+@keyframes chromeShift { 0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;} }
+.hero-sub { font-size:clamp(.85rem,2vw,1.05rem);color:var(--text2);margin-top:22px;font-weight:300;letter-spacing:.07em;animation:fadeUp 1.1s .75s both; }
+.hero-divider { width:1px;height:72px;background:var(--divider);margin:22px auto 0;animation:fadeUp 1.1s .95s both; }
+@keyframes fadeUp {
+  0%   { transform:translateY(36px) scale(.98); opacity:0; filter:blur(4px); }
+  60%  { filter:blur(0); }
+  100% { transform:translateY(0) scale(1);    opacity:1; }
+}
+
+/* ── SCROLL ARROW ── */
+.scroll-arrow {
+  display:flex; align-items:center; justify-content:center;
+  width:44px; height:44px; border-radius:50%; text-decoration:none; cursor:none;
+  margin:16px auto 0; color:var(--text2);
+  background:var(--ctrl-bg);
+  border:1px solid var(--ctrl-border);
+  backdrop-filter:blur(32px); -webkit-backdrop-filter:blur(32px);
+  box-shadow:inset 0 1px 0 var(--ctrl-shine),var(--shadow);
+  animation:fadeUp 1.1s 1.15s both,arrowBounce 2.8s 2.4s ease-in-out infinite;
+}
+.scroll-arrow:hover { background:var(--bg-card-h);border-color:var(--border-h);color:var(--text);animation:none;transform:translateY(5px) scale(1.06);box-shadow:var(--shadow-h);transition:transform .4s cubic-bezier(.34,1.56,.64,1),background .4s,box-shadow .4s; }
+@keyframes arrowBounce {
+  0%,100% { transform:translateY(0) scale(1); }
+  40%      { transform:translateY(9px) scale(.97); }
+  70%      { transform:translateY(4px) scale(.99); }
+}
+
+/* ── ABOUT STRIP ── */
+.about-strip {
+  position:relative; z-index:2; padding:32px 40px;
+  background:var(--strip-bg); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  text-align:center; overflow:hidden;
+  backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+}
+.about-text { font-size:clamp(1rem,2.4vw,1.6rem);font-weight:300;color:var(--text2);line-height:1.65;max-width:680px;margin:0 auto;position:relative;z-index:1; }
+.about-text em { font-style:normal;color:var(--text);font-weight:400; }
+
+/* ── SECTION ── */
+section { position:relative;z-index:2;padding:90px 40px;max-width:1200px;margin:0 auto; }
+.section-label { font-size:.68rem;letter-spacing:.42em;text-transform:uppercase;color:var(--text3);margin-bottom:14px; }
+.section-title { font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;letter-spacing:-.02em;color:var(--text);margin-bottom:52px; }
+
+/* ── GRID ── */
+.clips-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px; }
+
+/* ── CARD ── */
+.clip-card {
+  position:relative; border-radius:var(--radius-card); overflow:hidden;
+  background:var(--bg-card); border:1px solid var(--border);
+  backdrop-filter:blur(56px) saturate(200%); -webkit-backdrop-filter:blur(56px) saturate(200%);
+  box-shadow:var(--shadow); cursor:none; animation:cardIn .9s both;
+}
+.clip-card:nth-child(1){animation-delay:.06s;} .clip-card:nth-child(2){animation-delay:.18s;} .clip-card:nth-child(3){animation-delay:.30s;}
+@keyframes cardIn {
+  0%   { opacity:0; transform:translateY(48px) scale(.94); filter:blur(6px); }
+  60%  { filter:blur(0); }
+  100% { opacity:1; transform:none; }
+}
+.clip-card { transition:box-shadow .6s cubic-bezier(.4,0,.2,1),border-color .5s,background .5s; }
+.clip-card:hover { box-shadow:var(--shadow-h); }
+.clip-card::before {
+  content:''; position:absolute; inset:0; z-index:1; pointer-events:none; border-radius:var(--radius-card);
+  background:linear-gradient(135deg,var(--glass-top) 0%,transparent 45%,var(--ctrl-inner-glow) 100%);
+}
+.clip-card::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px; z-index:2;
+  background:linear-gradient(90deg,transparent 5%,var(--glass-top) 50%,transparent 95%);
+}
+
+/* ── PHOTO ── */
+.clip-photo { width:100%;aspect-ratio:16/10;background:#0a0f1e;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center; }
+.clip-photo img { width:100%;height:100%;object-fit:cover;filter:brightness(.84) contrast(1.06) saturate(.88);transition:transform .8s cubic-bezier(.25,.46,.45,.94),filter .6s; }
+.clip-card:hover .clip-photo img { transform:scale(1.07);filter:brightness(.96) contrast(1.08) saturate(1.0); }
+.clip-photo-placeholder { display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--text3);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase; }
+.clip-overlay { position:absolute;inset:0;z-index:1;opacity:.72;background:linear-gradient(to top,rgba(0,5,30,.80) 0%,rgba(0,5,30,.12) 45%,transparent 100%);transition:opacity .45s; }
+.clip-card:hover .clip-overlay { opacity:.9; }
+.free-badge {
+  position:absolute; top:13px; right:13px; z-index:3;
+  background:rgba(60,110,255,.15); border:1px solid rgba(100,160,255,.28);
+  backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+  padding:5px 14px; border-radius:100px;
+  font-size:.64rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase;
+  color:rgba(180,220,255,.92);
+}
+
+/* ── CLIP BODY ── */
+.clip-body { padding:20px 22px 22px;position:relative;z-index:3; }
+.clip-number { font-size:.58rem;letter-spacing:.32em;color:var(--text3);text-transform:uppercase;margin-bottom:7px; }
+.clip-name { font-size:1.05rem;font-weight:500;letter-spacing:-.01em;color:var(--text);margin-bottom:5px; }
+.clip-desc { font-size:.78rem;color:var(--text2);line-height:1.55;font-weight:300;margin-bottom:18px; }
+.clip-meta { display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap; }
+.clip-tag {
+  font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);
+  background:var(--tag-bg);border:1px solid var(--border);padding:3px 9px;border-radius:6px;
+}
+
+/* ── DOWNLOAD BUTTON ── */
+.dl-btn {
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  width:100%;padding:13px 16px;
+  background:var(--btn-bg);border:1px solid var(--border);border-radius:14px;
+  color:var(--btn-c);font-family:var(--font-sans);
+  font-size:.78rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;
+  text-decoration:none;cursor:none;position:relative;overflow:hidden;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),var(--shadow);
+}
+.dl-btn::before { content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(150,200,255,.08),transparent);transition:left .55s ease; }
+.dl-btn:hover::before { left:100%; }
+.dl-btn:hover { background:var(--btn-bg-h);border-color:var(--border-h);color:var(--text); }
+.dl-btn:active { transform:scale(.98); }
+
+/* ── FOOTER ── */
+footer {
+  position:relative;z-index:2;padding:44px 40px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--strip-bg);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+}
+.footer-logo {
+  font-family:var(--font-black);font-size:.88rem;
+  background:var(--chrome);background-size:200% 200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:chromeShift 7s ease-in-out infinite;
+}
+.footer-copy { font-size:.68rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase; }
+
+/* ── LANG FADE ── */
+.lang-fade { transition:opacity .25s ease,transform .25s ease; }
+.lang-fade.fading { opacity:0;transform:translateY(5px); }
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity:0; transform:translateY(40px) scale(.98);
+  filter:blur(5px);
+  transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1), filter .8s cubic-bezier(.4,0,.2,1);
+}
+.reveal.visible { opacity:1; transform:none; filter:blur(0); }
+.reveal-delay-1{transition-delay:.08s;} .reveal-delay-2{transition-delay:.20s;} .reveal-delay-3{transition-delay:.34s;}
+
+/* ── MOBILE ── */
+@media(max-width:860px){
+  nav{inset:8px 8px auto;padding:0 16px;}
+  .clips-grid{grid-template-columns:1fr;gap:14px;}
+  .nav-links{display:none;}
+  section{padding:60px 20px;}
+  footer{flex-direction:column;gap:14px;text-align:center;}
+  .about-strip{padding:24px 20px;}
+}
+@media(max-width:500px){ .hero-title{font-size:clamp(2.6rem,14vw,4rem);} }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursorRing"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Raykov Visuals</div>
+  <ul class="nav-links">
+    <li><a href="#clips" data-i18n="nav-clips">Clips</a></li>
+    <li><a href="#about" data-i18n="nav-about">About</a></li>
+  </ul>
+  <div class="nav-controls">
+    <button class="lang-toggle ctrl-glass" id="langToggle" aria-label="Switch language">
+      <div class="lang-pill"></div>
+      <div class="lang-track">
+        <div class="lang-slide">EN</div>
+        <div class="lang-slide">BG</div>
+      </div>
+    </button>
+    <button class="theme-toggle ctrl-glass" id="themeToggle" aria-label="Toggle theme">
+      <span class="toggle-icons"><span>☀️</span><span>🌙</span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow lang-fade" data-i18n="eyebrow">Car Edit Clips — Free Forever</div>
+  <h1 class="hero-title">RAYKOV<br>VISUALS</h1>
+  <p class="hero-sub lang-fade" data-i18n="hero-sub">Cinematic car footage &amp; edit-ready clips, no strings attached.</p>
+  <div class="hero-divider"></div>
+  <a href="#clips" class="scroll-arrow" aria-label="Go to clips">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </a>
+</div>
+
+<!-- ABOUT -->
+<div class="about-strip" id="about">
+  <p class="about-text reveal">
+    <span class="lang-fade" data-i18n="about-line1">Built for <em>editors, creators &amp; car culture.</em></span><br>
+    <span class="lang-fade" data-i18n="about-line2">Every clip is <em>free to use</em> — no watermarks, no license fees, no catch.</span>
+  </p>
+</div>
+
+<!-- CLIPS -->
+<section id="clips">
+  <div class="section-label lang-fade" data-i18n="section-label">The Collection</div>
+  <h2 class="section-title reveal lang-fade" data-i18n="section-title">Free Clips</h2>
+  <div class="clips-grid">
+
+    <div class="clip-card reveal reveal-delay-1">
+      <div class="clip-photo">
+        <img src="" alt="Clip 01" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="clip-photo-placeholder" style="display:flex">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".35"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span class="lang-fade" data-i18n="placeholder">Add photo here</span>
+        </div>
+        <div class="clip-overlay"></div>
+        <div class="free-badge lang-fade" data-i18n="free">Free</div>
+      </div>
+      <div class="clip-body">
+        <div class="clip-number lang-fade" data-i18n="clip-num-1">Clip 01</div>
+        <div class="clip-name">Midnight Drift Vol.1</div>
+        <div class="clip-desc lang-fade" data-i18n="desc-1">Low-angle cinematic shot. Perfect for edits, reels &amp; commercial use.</div>
+        <div class="clip-meta"><span class="clip-tag">4K</span><span class="clip-tag">60fps</span><span class="clip-tag">RAW</span></div>
+        <a class="dl-btn" href="YOUR_DOWNLOAD_LINK_HERE" target="_blank" download>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span class="lang-fade" data-i18n="download">Download Free</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="clip-card reveal reveal-delay-2">
+      <div class="clip-photo">
+        <img src="" alt="Clip 02" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="clip-photo-placeholder" style="display:flex">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".35"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span class="lang-fade" data-i18n="placeholder">Add photo here</span>
+        </div>
+        <div class="clip-overlay"></div>
+        <div class="free-badge lang-fade" data-i18n="free">Free</div>
+      </div>
+      <div class="clip-body">
+        <div class="clip-number lang-fade" data-i18n="clip-num-2">Clip 02</div>
+        <div class="clip-name">Golden Hour Cruise</div>
+        <div class="clip-desc lang-fade" data-i18n="desc-2">Warm tones, open road. Shot at the magic hour for that film look.</div>
+        <div class="clip-meta"><span class="clip-tag">4K</span><span class="clip-tag">24fps</span><span class="clip-tag">Log</span></div>
+        <a class="dl-btn" href="YOUR_DOWNLOAD_LINK_HERE" target="_blank" download>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span class="lang-fade" data-i18n="download">Download Free</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="clip-card reveal reveal-delay-3">
+      <div class="clip-photo">
+        <img src="" alt="Clip 03" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="clip-photo-placeholder" style="display:flex">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".35"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span class="lang-fade" data-i18n="placeholder">Add photo here</span>
+        </div>
+        <div class="clip-overlay"></div>
+        <div class="free-badge lang-fade" data-i18n="free">Free</div>
+      </div>
+      <div class="clip-body">
+        <div class="clip-number lang-fade" data-i18n="clip-num-3">Clip 03</div>
+        <div class="clip-name">Cold Start Sessions</div>
+        <div class="clip-desc lang-fade" data-i18n="desc-3">Exhaust steam, rain-slicked streets. Moody urban atmosphere pack.</div>
+        <div class="clip-meta"><span class="clip-tag">4K</span><span class="clip-tag">120fps</span><span class="clip-tag">S-Log</span></div>
+        <a class="dl-btn" href="YOUR_DOWNLOAD_LINK_HERE" target="_blank" download>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span class="lang-fade" data-i18n="download">Download Free</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Raykov Visuals</div>
+  <div class="footer-copy">© <span id="yr"></span> Raykov Visuals — <span class="lang-fade" data-i18n="rights">All Rights Reserved</span></div>
+</footer>
+
+<script>
+const T = {
+  en:{
+    'nav-clips':'Clips','nav-about':'About',
+    'eyebrow':'Car Edit Clips — Free Forever',
+    'hero-sub':'Cinematic car footage & edit-ready clips, no strings attached.',
+    'about-line1':'Built for <em>editors, creators & car culture.</em>',
+    'about-line2':'Every clip is <em>free to use</em> — no watermarks, no license fees, no catch.',
+    'section-label':'The Collection','section-title':'Free Clips',
+    'clip-num-1':'Clip 01','clip-num-2':'Clip 02','clip-num-3':'Clip 03',
+    'desc-1':'Low-angle cinematic shot. Perfect for edits, reels & commercial use.',
+    'desc-2':'Warm tones, open road. Shot at the magic hour for that film look.',
+    'desc-3':'Exhaust steam, rain-slicked streets. Moody urban atmosphere pack.',
+    'free':'Free','placeholder':'Add photo here','download':'Download Free','rights':'All Rights Reserved'
+  },
+  bg:{
+    'nav-clips':'Клипове','nav-about':'За нас',
+    'eyebrow':'Авто клипове — Безплатно завинаги',
+    'hero-sub':'Кинематографични автомобилни кадри, готови за монтаж — без условия.',
+    'about-line1':'Създадено за <em>монтажисти, творци & автомобилна култура.</em>',
+    'about-line2':'Всеки клип е <em>безплатен</em> — без воден знак, без лицензи, без условия.',
+    'section-label':'Колекцията','section-title':'Безплатни клипове',
+    'clip-num-1':'Клип 01','clip-num-2':'Клип 02','clip-num-3':'Клип 03',
+    'desc-1':'Нисък ъгъл, кинематографичен кадър. Перфектен за монтаж, рийлове & комерсиална употреба.',
+    'desc-2':'Топли тонове, открит път. Заснет в магическия час за истински филмов вид.',
+    'desc-3':'Изпарения от ауспуха, намокрени улици. Пакет с мрачна градска атмосфера.',
+    'free':'Безплатно','placeholder':'Добави снимка тук','download':'Изтегли безплатно','rights':'Всички права запазени'
+  }
+};
+
+function applyLang(lang, anim) {
+  const els = document.querySelectorAll('[data-i18n]');
+  if (anim) {
+    els.forEach(el => el.classList.add('fading'));
+    setTimeout(() => {
+      els.forEach(el => { const k=el.getAttribute('data-i18n'); if(T[lang][k]!=null) el.innerHTML=T[lang][k]; el.classList.remove('fading'); });
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang === 'bg' ? 'bg' : 'en';
+    }, 260);
+  } else {
+    els.forEach(el => { const k=el.getAttribute('data-i18n'); if(T[lang][k]!=null) el.innerHTML=T[lang][k]; });
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.lang = lang === 'bg' ? 'bg' : 'en';
+  }
+}
+
+const H = document.documentElement;
+const savedTheme = localStorage.getItem('rv-theme') || 'light';
+const savedLang  = localStorage.getItem('rv-lang')  || 'en';
+H.setAttribute('data-theme', savedTheme);
+applyLang(savedLang, false);
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const n = H.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  H.setAttribute('data-theme', n); localStorage.setItem('rv-theme', n);
+});
+document.getElementById('langToggle').addEventListener('click', () => {
+  const n = H.getAttribute('data-lang') === 'en' ? 'bg' : 'en';
+  localStorage.setItem('rv-lang', n); applyLang(n, true);
+});
+
+/* CURSOR — physics spring */
+const cur = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+let mx=0,my=0,
+    rx=0,ry=0,  // ring position
+    vx=0,vy=0;  // ring velocity
+
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+
+// Spring constants: stiffness & damping
+const STIFF=0.12, DAMP=0.78;
+(function raf(){
+  const fx=(mx-rx)*STIFF, fy=(my-ry)*STIFF;
+  vx=(vx+fx)*DAMP; vy=(vy+fy)*DAMP;
+  rx+=vx; ry+=vy;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(raf);
+})();
+
+document.querySelectorAll('a,button,.clip-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ ring.classList.add('big'); cur.classList.add('big'); });
+  el.addEventListener('mouseleave',()=>{ ring.classList.remove('big'); cur.classList.remove('big'); });
+});
+
+/* SCROLL REVEAL */
+const revealObs = new IntersectionObserver((entries,obs)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+},{threshold:.08, rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* CARD TILT — smooth interpolation */
+document.querySelectorAll('.clip-card').forEach(card=>{
+  let tRx=0,tRy=0,cRx=0,cRy=0,tiltRaf=null;
+
+  function tiltLoop(){
+    cRx+=(tRx-cRx)*.10;
+    cRy+=(tRy-cRy)*.10;
+    const lift = -6, scale = 1.018;
+    card.style.transform=`translateY(${lift}px) scale(${scale}) rotateX(${cRx}deg) rotateY(${cRy}deg)`;
+    if(Math.abs(tRx-cRx)>.01 || Math.abs(tRy-cRy)>.01) tiltRaf=requestAnimationFrame(tiltLoop);
+    else tiltRaf=null;
+  }
+
+  card.addEventListener('mousemove', e=>{
+    const r=card.getBoundingClientRect();
+    tRx=-((e.clientY-r.top-r.height/2)/r.height)*6;
+    tRy= ((e.clientX-r.left-r.width/2)/r.width)*6;
+    card.style.transition='box-shadow .6s cubic-bezier(.4,0,.2,1)';
+    if(!tiltRaf) tiltRaf=requestAnimationFrame(tiltLoop);
+  });
+
+  card.addEventListener('mouseleave',()=>{
+    tRx=0; tRy=0;
+    function resetLoop(){
+      cRx+=(0-cRx)*.08; cRy+=(0-cRy)*.08;
+      card.style.transform=`translateY(0) scale(1) rotateX(${cRx}deg) rotateY(${cRy}deg)`;
+      if(Math.abs(cRx)>.01 || Math.abs(cRy)>.01) requestAnimationFrame(resetLoop);
+      else { card.style.transform=''; card.style.transition=''; }
+    }
+    if(tiltRaf){ cancelAnimationFrame(tiltRaf); tiltRaf=null; }
+    requestAnimationFrame(resetLoop);
+  });
+});
+</script>
+</body>
+</html>
